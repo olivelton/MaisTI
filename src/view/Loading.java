@@ -1,101 +1,76 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.*;
+import java.util.EventListener;
 
-import com.sun.glass.events.WindowEvent;
-import com.sun.java.swing.plaf.windows.WindowsOptionPaneUI;
-import com.sun.javafx.event.EventQueue;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
-public class Loading extends JFrame implements VisualWindow {
-	
-	private JLabel lbLoad;
-	
+import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
 
-	public Loading() {
-		/*
-		 * chamamos o set layout no construtor para toda vez que a classe for
-		 * instanciada ela venha a assumir os dados de layout e aparecer a tela
-		 */
+public class Loading extends JWindow implements VisualWindow {
 
+	private int duration;
+
+	public Loading(int d) {
+		duration = d;
+		showLoadingAndExit();
+	}
+
+	// Este é um método simples para mostrar uma tela de apresentção
+	// no centro da tela durante a quantidade de tempo passada no construtor
+	public void setLayout() {
+		JPanel panelContent = (JPanel) getContentPane();
+		panelContent.setBackground(Color.white);
+
+		// Configura a posição e o tamanho da janela
+		int width = 700;
+		int height = 300;
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (screen.width - width) / 2;
+		int y = (screen.height - height) / 2;
+
+		setBounds(x, y, width, height);
+
+		// Constrói o splash screen
+		JLabel label = new JLabel(new ImageIcon("logo.png"));
+		JLabel lbAutor = new JLabel("Projeto +TI -UTFPR 2017", JLabel.CENTER);
+		lbAutor.setFont(new Font("Arial", Font.BOLD, 30));
+		panelContent.add(label, BorderLayout.CENTER);
+		panelContent.add(lbAutor, BorderLayout.SOUTH);
+		// falamos da cor da borda em rgb
+		Color oraRed = new Color(100, 149, 237, 255);
+		// dizemos qual a largura de borda deve ter
+		panelContent.setBorder(BorderFactory.createLineBorder(oraRed, 2));
+		// Torna visível
+		setVisible(true);
+
+		// Espera ate que os recursos estejam carregados
+		try {
+			Thread.sleep(duration);
+		} catch (Exception e) {
+		}
+		setVisible(false);
+	}
+
+	public void showLoadingAndExit() {
 		setLayout();
-		setComponents();
-		setEvents();
-		loadingOut();
+		dispose();
 
+		new WindowPrincipal();
 	}
 
 	@Override
 	public void setComponents() {
-
-		/* sera metodo de tratamento de todos os componentes */
-		lbLoad = new JLabel("Carregando...");
-		
-		
-		// alteramos tamanho da fonte e tipo da fonte
-		lbLoad.setFont(new Font("Dialog", Font.PLAIN, 36));
-		// colocamos o alinhamneto do label como centro
-		lbLoad.setHorizontalAlignment((int)CENTER_ALIGNMENT );
-		
-		// depois adicionamos o label
-		add(lbLoad);
-		
-		
-
-	}
-
-	@Override
-	public void setLayout() {
-		// metodo de tratamento do layout
-		// falamos qual sera o tamanho do jframe
-		setSize(600, 300);
-		// setLocationRelativeTo( null ); para que a tela fique centralizada no monitor
-		setLocationRelativeTo(null);
-		// torna janela visivel
-		setVisible(true);
-		// diz para fechar o processo quando clica no X da janela
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// setamos o fundo da tela cor
-		// getContentPane();
-		// setamos o titulo da tela
-		// setTitle("Loading");
-		setLayout(new BorderLayout());
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void setEvents() {
+		// TODO Auto-generated method stub
 	
 		
-			
 	}
-	
-	public void loadingOut() {
-		
-		
-		//conta 3 segundos e fecha a janela
-		int segundos = 2;
-		try{
-			for (int i = segundos; i > 0; i--){
-				
-			Thread.sleep(1000); // 1 segundo
-			
-			}
-			new WindowPrincipal();
-			dispose();
-		} catch (InterruptedException e1){
-			JOptionPane.showMessageDialog(null, "erro ocorrido ao carregar o sistema");
-		}
-	}
+
 }

@@ -8,14 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class WindowPrincipal extends JFrame implements VisualWindow {
-private PanelLogin panelLogin;
+	private PanelLogin panelLogin;
 
 	public WindowPrincipal() {
 		setLayout();
 		setComponents();
 		setEvents();
 		new PanelLogin();
-		
+
 	}
 
 	@Override
@@ -23,8 +23,6 @@ private PanelLogin panelLogin;
 		// TODO Auto-generated method stub
 		panelLogin = new PanelLogin();
 		add(panelLogin, BorderLayout.CENTER);
-		
-		
 
 	}
 
@@ -52,7 +50,6 @@ private PanelLogin panelLogin;
 		// getContentPane();
 		// setamos o titulo da tela
 		setLayout(new CardLayout());
-		
 
 	}
 
