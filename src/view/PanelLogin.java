@@ -75,7 +75,7 @@ public class PanelLogin extends JPanel implements VisualWindow {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
-			System.exit(0);
+			//System.exit(0);
 		});
 
 	}
