@@ -2,14 +2,10 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class PanelLogin extends JPanel implements VisualWindow {
 	private JLabel user;
@@ -71,11 +67,23 @@ public class PanelLogin extends JPanel implements VisualWindow {
 	@Override
 	public void setEvents() {
 
+//ação de sair do botão cancelar da tela de login
 		jbOut.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				System.exit(0);
 			}
-			//System.exit(0);
+
+		});
+
+		jbLogin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				//chamada de metodo que verifica usuario para logar no sistema
+				JOptionPane.showMessageDialog(null, "teste de botão ");
+
+			}
 		});
 
 	}
