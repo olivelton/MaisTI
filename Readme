@@ -1,3 +1,17 @@
 Inicio do projeto Mais TI para apresentação do trabalho de 
 linguagem orientada a objetos da turma de TSI da 
 Universidade tecnologica federal do Paraná 
+
+
+tem que criar arquivo manifest.mf para adicionar ao jar quando gerar executavel 
+
+
+
+Manifest-Version: 1.0
+SplashScreen-Image: src/logo.png
+X-COMMENT: Main-Class will be added automatically by build
+
+ é possível também testar via execução do próprio netbeans, indo nas Propriedades e adicionando a linha -splash:src/logo.png em VM Options:
+
+intelij tbm funciona
+-splash:src/logo.png
