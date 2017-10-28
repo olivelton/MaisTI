@@ -4,17 +4,18 @@ package control;
 
 
 import view.CustomSplashScreen;
+import view.Login;
+
+import javax.swing.*;
 
 public class Main {
 
-    /*Manifest-Version: 1.0
-SplashScreen-Image: logo.png
-X-COMMENT: Main-Class will be added automatically by build*/
-
 
 	public static void main(String[] args) {
-       loading();
 
+        // loading();
+        //System.out.println("teste");
+        new Login();
 
 
     }
@@ -29,14 +30,17 @@ X-COMMENT: Main-Class will be added automatically by build*/
     static void loading(){
         CustomSplashScreen.splashInit();
 
-        for (int i = 0; i < 10; i++) {
-            CustomSplashScreen.splashProgress(i * 20);
+       for (int i = 0; i < 50; i++) {
+            CustomSplashScreen.splashProgress(i * 2);
             try {
-                Thread.sleep(500);
+                Thread.sleep(20);
+
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
         }
+
+
     }
 
 	}
