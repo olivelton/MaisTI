@@ -19,12 +19,13 @@ public class Login extends JFrame implements VisualWindow {
     private JButton jbIn;
     private JButton jbOut;
     private JLabel lbStatus;
+    private String stat = "";
 //construtor da classe
     public Login(){
         setLayout();//chama o metodo responsavel por layoute  e tamnhos da janela
         setComponents();//chama metodo responsavel por dizer e setar os componentes na screen
         setEvents();// chama o metodos responsavel pelos eventos da screen
-
+        repaintAll();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class Login extends JFrame implements VisualWindow {
         jtPassword = new JTextField();//instancia novo caixa de texto de senha
         jbIn = new JButton("Entrar");//instancia botão entrar
         jbOut = new JButton("Cancelar");//instancia botão sair
-        lbStatus = new JLabel("dados incorretos ");//instancia label de dados incorretos
+        lbStatus = new JLabel("usuario ou senha Incorreto");//instancia label de dados incorretos
 
         // trabalha com os tamanhos dos labels e posicionamento
         lbUser.setBounds(100, 50, 120,40); //seta posicionamento e tamanho do label usuario
@@ -66,7 +67,7 @@ public class Login extends JFrame implements VisualWindow {
         jtPassword.setBounds(210,100,120,40);//seta posicionamento e tamanho da caixa de texto senha
         jbIn.setBounds(100, 150, 110,40);//seta tamanho e posião botão entrar
         jbOut.setBounds(220, 150, 110,40);//seta tamanho e posição do botão cancelar
-        lbStatus.setBounds(100, 200, 100,25);//posiciona label de dados incoretos
+        lbStatus.setBounds(100, 200, 100,40);//posiciona label de dados incoretos
         lbStatus.setForeground(Color.RED);//altera cor do texto de dados incorretos
 
         //adiciona componentes
@@ -100,8 +101,9 @@ public class Login extends JFrame implements VisualWindow {
                         }
                         else{
 
-
                             getContentPane().add(lbStatus);
+                            jtPassword.setBackground(Color.red);
+                            jtUser.setBackground(Color.red);
                         }
             }
         });
@@ -122,7 +124,16 @@ public class Login extends JFrame implements VisualWindow {
 
     }
 
+    private void repaintAll() {
+        SwingUtilities.invokeLater(new Runnable() {
 
+            @Override
+            public void run() {
+                repaint();
+
+            }
+        });
+    }
 }
 
 
