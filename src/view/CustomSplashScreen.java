@@ -25,7 +25,7 @@ public class CustomSplashScreen {
             //desenha a área da barra de progresso, você pode alterar as dimensoes pra testar a que mais gostar
             //  os parametros representam posição horizontal  e vertical (em relação a imagem), altura e largura, respectivamente
             splashProgressArea = new Rectangle2D.Double(1.0, height * 0.87, width, height * 0.08);
-            //exibe a imagem do splash centralizada na tela
+            //exibe a imagem do splash centralizada na screen
             splashGraphics = mySplash.createGraphics();
             //inicia a barra de progresso(pode ser removido)
             splashProgress(0);

@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // loading();
+         loading();
         //System.out.println("teste");
         new Login();
 
@@ -28,7 +28,7 @@ public class Main {
         for (int i = 0; i < 50; i++) {
             CustomSplashScreen.splashProgress(i * 2);
             try {
-                Thread.sleep(20);
+                Thread.sleep(2);
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
