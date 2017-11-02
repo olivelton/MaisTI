@@ -96,7 +96,7 @@ public class OpenDB {
 
     //Método que fecha sua conexão//
 
-   /* public static boolean FecharConexao() {
+   public boolean FecharConexao() {
 
         try {
 
@@ -117,13 +117,7 @@ public class OpenDB {
 
     //Método que reinicia sua conexão//
 
-    public static java.sql.Connection ReiniciarConexao() {
-
-        FecharConexao();
 
 
-        return ConexaoMySQL.getConexaoMySQL();
-
-    }*/
 
 }
