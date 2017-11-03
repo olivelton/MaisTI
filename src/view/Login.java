@@ -1,6 +1,6 @@
 package view;
 
-import control.OpenDB;
+import model.UserDao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class Login extends JFrame implements VisualWindow {
     private JButton jbOut;
     private JLabel lbStatus;
     private String stat = "";
-      private int cont = 3;
+    private int cont = 3;
 //construtor da classe
     public Login(){
         setLayout();//chama o metodo responsavel por layoute  e tamnhos da janela
@@ -92,26 +92,26 @@ public class Login extends JFrame implements VisualWindow {
         jbIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //instanciamos a classe openDB que sera classe que vai conectar ao banco
-                //cria instancia de opeNDB e verificando usuario nisso ja passamos por parametros os usuario e senha do mysql
-                OpenDB login = new OpenDB(jtUser.getText(), jpPassword.getText());
-                //criamos uma variavel que vai receber se verdadeiro se banco conectou e falso se não
-                boolean status =  login.checkConnection();
+                //instanciamos classe de validação de usuario do sistema
+                UserDao enter = new UserDao();
+                //passamos ao status o metodo que envia usuario e senha para checar em validade
+                //e esta retornara true se usuario e senha estiverem certos e false se estiverem errado
+
                         //tratamos se usuario e senha receberem true continua para o sistema
                         //senão da o alerta e espera novas entradas
-                        if(status){
+                        if(enter.checkLogin(jtUser.getText(),jpPassword.getText())){
                             new MainWindow();//cria instancia da janela principal do sistema
                             dispose();//fecha janela de login
                         }
                         else{
+
                             Random ran = new Random(); //classe de numeros randonomicos
-
-
-
                             stat = "Usuario ou senha Icorretos";
                             jpPassword.setBackground(new Color(255, 71, 54));
                             jtUser.setBackground(new Color(255, 71, 54));
-                           getContentPane().setBackground(new Color(ran.nextInt(255),ran.nextInt(255), ran.nextInt(255)));
+                            lbPassword.setForeground(new Color(255, 71, 54));
+                            lbUser.setForeground(new Color(255, 71, 54));
+                           getContentPane().setBackground(new Color(5,ran.nextInt(255), ran.nextInt(255)));
                             lbStatus.setText("você possui mais "+ cont-- +" tentativas ");
                             if(cont<0){
                                 System.exit(0);

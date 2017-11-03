@@ -12,8 +12,9 @@ public class Main {
     public static void main(String[] args) {
 
          loading();
-        //System.out.println("teste");
+
         new Login();
+
 
 
     }
