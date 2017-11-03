@@ -1,5 +1,6 @@
 package view;
 
+import control.Main;
 import model.UserDao;
 
 import javax.swing.*;
@@ -51,7 +52,7 @@ public class Login extends JFrame implements VisualWindow {
         setResizable(true);
 
         //Define se a janela fechará o sistema ou apenas ela mesma (neste caso apenas ela mesma
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     //metodos da interface sobreescritos
@@ -168,16 +169,20 @@ public class Login extends JFrame implements VisualWindow {
         //senão da o alerta e espera novas entradas
         //chama metodo checklogin do DAO usuario
         if (enter.checkLogin(jtUser.getText(), jpPassword.getText())) {
+            try {
+                new MainWindow(jtUser.getText());//cria instancia da janela principal do sistema e passa qual usuario esta usando
+            }catch (Exception e){
+               System.out.print(e.getMessage());
 
-            new MainWindow();//cria instancia da janela principal do sistema
-            dispose();//fecha janela de login
+            }
+           dispose();//fecha janela de login
 
         } else {
             jpPassword.setBackground(new Color(255, 71, 54));// muda a cor da caixa texto de senha
             jtUser.setBackground(new Color(255, 71, 54));//muda a cor da caixa de texto usuario
             lbPassword.setForeground(new Color(255, 71, 54));//muda a cor da letra do label senha
             lbUser.setForeground(new Color(255, 71, 54));//muda a cor do label de usuario
-            getContentPane().setBackground(new Color(31, 58, 105));//muda cor de fundo da tela chamar atenção user
+            getContentPane().setBackground(new Color(67, 198, 190));//muda cor de fundo da tela chamar atenção user
             lbStatus.setText("você possui mais " + cont-- + " tentativas ");// manda msg de dados incorretos ao label e mostra contador
 
             //trata contagem onde chegando a zero fecha a tela de login do sistema
