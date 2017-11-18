@@ -12,7 +12,7 @@ import model.User;
 
 import javax.swing.*;
 
-public class UserDao {
+public class UsuarioDao {
 
     public void create(User user) {
         //chamamos a conexão com o banco
@@ -109,6 +109,38 @@ public class UserDao {
         }
         return check;
 
+    }
+    
+    public void novoUsuario(String nome, String senha) {
+    	 Connection con = ConnectDatabase.getConnection();
+         PreparedStatement stat;// cria um statment
+         stat = null;//seta null ao statment
+       
+        
+
+
+         //tratamento de erro
+         try {
+             //atribui query ao statment
+        	 
+             stat = con.prepareStatement("INSERT INTO tb_usuario (nome_usuario, senha) VALUES(?, ?)");
+             stat.setString(1, nome);//primeiro campo recebe login
+             stat.setString(2, senha);// segundo campo recebe senha
+            
+            stat.execute();
+             
+             JOptionPane.showMessageDialog(null, "Usuario Cadastrado com Sucesso");
+
+
+         }catch (SQLException u){//caso de erro cai no catch e informa usuario com exception
+             JOptionPane.showMessageDialog(null," erro ao Cadastrar usuario: "+u);
+         }finally {// finaly idependente se de exception ou não
+             //vai cair aqui pra finalizar e este finaliza a conexão e o statment
+             ConnectDatabase.closeConnection(con, stat);
+
+         }
+         
+    	
     }
 
 

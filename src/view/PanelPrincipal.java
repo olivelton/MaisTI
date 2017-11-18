@@ -62,7 +62,7 @@ public class PanelPrincipal extends JPanel implements VisualWindow  {
 			@Override
 			public void run() {
 				repaint();
-
+				
 			}
 		});
 	}

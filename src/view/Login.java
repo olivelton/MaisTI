@@ -1,6 +1,6 @@
 package view;
 
-import modelDao.UserDao;
+import modelDao.UsuarioDao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
  *
  */
 public class Login extends JFrame implements VisualWindow {
-    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();//dimension com metodo para captura do tamanho da tela do computador
+    Dimension monitor = Toolkit.getDefaultToolkit().getScreenSize();//dimension com metodo para captura do tamanho da tela do computador
     private JLabel labelUsuario;
     private JLabel labelSenha;
     private JPasswordField jpassSenha;
@@ -35,7 +35,7 @@ public class Login extends JFrame implements VisualWindow {
     public void setLayout() {
         //centraliza o jframe pega os valores da tela do pc e divide por 2 e coloca janela la
         // JOptionPane.showMessageDialog(null, tela);
-        setLocation((screen.width - 500) / 2, (screen.height - 300) / 2);
+        setLocation((monitor.width - 500) / 2, (monitor.height - 300) / 2);
         //setLocationRelativeTo(null);
         //deixa o frame visivel
         setVisible(true);
@@ -160,7 +160,7 @@ public class Login extends JFrame implements VisualWindow {
     //criamos o metodo que deve ser chamado nos eventos de logar no sistema ou de kwy press enter
     private void entraSistema() {
         //instanciamos classe de validação de usuario do sistema
-        UserDao enter = new UserDao();
+        UsuarioDao enter = new UsuarioDao();
 
         //tratamos se usuario e senha receberem true continua para o sistema
         //senão da o alerta e espera novas entradas
