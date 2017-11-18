@@ -1,43 +1,40 @@
 package view;
 
-import control.Main;
-import model.UserDao;
+import modelDao.UserDao;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Random;
 
 /**
  *
  */
 public class Login extends JFrame implements VisualWindow {
-    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();//dimension com metodo para captura do tamanho da screen do computador
-    private JLabel lbUser;
-    private JLabel lbPassword;
-    private JPasswordField jpPassword;
-    private JTextField jtUser;
-    private JButton jbIn;
-    private JButton jbOut;
-    private JLabel lbStatus;
-    private int cont = 3;
+    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();//dimension com metodo para captura do tamanho da tela do computador
+    private JLabel labelUsuario;
+    private JLabel labelSenha;
+    private JPasswordField jpassSenha;
+    private JTextField jtUsuario;
+    private JButton jbEntrar;
+    private JButton jbCancelar;
+    private JLabel labelEstado;
+    private int contador = 3;
 
     //construtor da classe
     public Login() {
         setLayout();//chama o metodo responsavel por layoute  e tamnhos da janela
-        setComponents();//chama metodo responsavel por dizer e setar os componentes na screen
-        setEvents();// chama o metodos responsavel pelos eventos da screen
+        setComponents();//chama metodo responsavel por dizer e setar os componentes na tela
+        setEvents();// chama o metodos responsavel pelos eventos da tela
         repaintAll();
     }
 
     //metodos da interface sobreescritos
     @Override
     public void setLayout() {
-        //centraliza o jframe pega os valores da screen do pc e divide por 2 e coloca janela la
-        // JOptionPane.showMessageDialog(null, screen);
+        //centraliza o jframe pega os valores da tela do pc e divide por 2 e coloca janela la
+        // JOptionPane.showMessageDialog(null, tela);
         setLocation((screen.width - 500) / 2, (screen.height - 300) / 2);
         //setLocationRelativeTo(null);
         //deixa o frame visivel
@@ -59,35 +56,35 @@ public class Login extends JFrame implements VisualWindow {
     @Override
     public void setComponents() {
         //instancia componentes
-        lbUser = new JLabel("Usuario:");//instancia novo lebel de usuario
-        jtUser = new JTextField();//instancia novo text de usuario
-        lbPassword = new JLabel("Senha:");//instancia novo label de senha
-        jpPassword = new JPasswordField();//instancia novo caixa de texto de senha
-        jbIn = new JButton("Entrar");//instancia botão entrar
-        jbOut = new JButton("Cancelar");//instancia botão sair
-        lbStatus = new JLabel();//instancia label de dados incorretos
+        labelUsuario = new JLabel("Usuario:");//instancia novo lebel de usuario
+        jtUsuario = new JTextField();//instancia novo text de usuario
+        labelSenha = new JLabel("Senha:");//instancia novo label de senha
+        jpassSenha = new JPasswordField();//instancia novo caixa de texto de senha
+        jbEntrar = new JButton("Entrar");//instancia botão entrar
+        jbCancelar = new JButton("Cancelar");//instancia botão sair
+        labelEstado = new JLabel();//instancia label de dados incorretos
 
         // trabalha com os tamanhos dos labels e posicionamento
-        lbUser.setBounds(110, 50, 120, 40); //seta posicionamento e tamanho do label usuario
-        jtUser.setBounds(220, 50, 120, 40);//seta posicionamento e tamanho da caixa de texto usuario
-        lbPassword.setBounds(110, 100, 120, 40);//seta posicionamento e tamanho do label senha
-        jpPassword.setBounds(220, 100, 120, 40);//seta posicionamento e tamanho da caixa de texto senha
-        jbIn.setBounds(110, 150, 110, 40);//seta tamanho e posião botão entrar
-        jbOut.setBounds(230, 150, 110, 40);//seta tamanho e posição do botão cancelar
-        lbStatus.setBounds(110, 200, 250, 40);//posiciona label de dados incoretos
-        lbStatus.setForeground(Color.RED);//altera cor do texto de dados incorretos
+        labelUsuario.setBounds(110, 50, 120, 40); //seta posicionamento e tamanho do label usuario
+        jtUsuario.setBounds(220, 50, 120, 40);//seta posicionamento e tamanho da caixa de texto usuario
+        labelSenha.setBounds(110, 100, 120, 40);//seta posicionamento e tamanho do label senha
+        jpassSenha.setBounds(220, 100, 120, 40);//seta posicionamento e tamanho da caixa de texto senha
+        jbEntrar.setBounds(110, 150, 110, 40);//seta tamanho e posião botão entrar
+        jbCancelar.setBounds(230, 150, 110, 40);//seta tamanho e posição do botão cancelar
+        labelEstado.setBounds(110, 200, 250, 40);//posiciona label de dados incoretos
+        labelEstado.setForeground(Color.RED);//altera cor do texto de dados incorretos
 
 
         //adiciona componentes
-        getContentPane().add(lbUser);// add label de usuario
-        getContentPane().add(jtUser);//add caixa de texto do usuario
-        getContentPane().add(lbPassword);//add label de senha
-        getContentPane().add(jpPassword);//add caixa de texto de senha
-        getContentPane().add(jbIn);//add botão entrar
-        getContentPane().add(jbOut);//add botão cancelar
-        getContentPane().add(lbStatus);//adiciona o label de senha errado
-        getRootPane().setDefaultButton(jbIn);// adiciona o botão entrat como principal da janela sempre que
-        //pressionar enter ele acionara o evento tratado do jbIn
+        getContentPane().add(labelUsuario);// add label de usuario
+        getContentPane().add(jtUsuario);//add caixa de texto do usuario
+        getContentPane().add(labelSenha);//add label de senha
+        getContentPane().add(jpassSenha);//add caixa de texto de senha
+        getContentPane().add(jbEntrar);//add botão entrar
+        getContentPane().add(jbCancelar);//add botão cancelar
+        getContentPane().add(labelEstado);//adiciona o label de senha errado
+        getRootPane().setDefaultButton(jbEntrar);// adiciona o botão entrat como principal da janela sempre que
+        //pressionar enter ele acionara o evento tratado do jbEntrar
     }
 
     //metodos da interface sobreescritos
@@ -95,7 +92,7 @@ public class Login extends JFrame implements VisualWindow {
     public void setEvents() {
 
         // tratamento de tecla pressionada onde chamada classe validations e fara tipo de letra e validação nos campos
-        jtUser.addKeyListener(new java.awt.event.KeyListener() {
+        jtUsuario.addKeyListener(new java.awt.event.KeyListener() {
 
             @Override
             public void keyTyped(KeyEvent e) {
@@ -108,13 +105,13 @@ public class Login extends JFrame implements VisualWindow {
             }
 
             public void keyReleased(KeyEvent e) {
-                jtUser.setText(new Validations().upperCase(jtUser.getText()));// chama metodo da classe validações e passa parametro
+                jtUsuario.setText(new Validations().upperCase(jtUsuario.getText()));// chama metodo da classe validações e passa parametro
             }
 
         });
 
         //evento keylistenner para tratar quando pressiona tecla dentro do password
-        jpPassword.addKeyListener(new java.awt.event.KeyListener() {
+        jpassSenha.addKeyListener(new java.awt.event.KeyListener() {
 
             @Override
             public void keyTyped(KeyEvent e) {
@@ -131,24 +128,24 @@ public class Login extends JFrame implements VisualWindow {
             @Override
             public void keyReleased(KeyEvent e) {
                 // chama metodo da classe validações e passa parametro capturado no campo de senha do login
-                jpPassword.setText(new Validations().upperCase(jpPassword.getText()));
+                jpassSenha.setText(new Validations().upperCase(jpassSenha.getText()));
             }
 
         });
 
 
         //tratando evento do botão sair eventos dos botões estão sendo tratados
-        jbIn.addActionListener(new ActionListener() {
+        jbEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inSystem();// metodo responsavel por fazer validadção de dados
+                entraSistema();// metodo responsavel por fazer validadção de dados
                 //e comnunicar com outras classes
             }
         });
 
 
         //invocamos um ouvindo action listenner e instanciamos Action listener
-        jbOut.addActionListener(new ActionListener() {
+        jbCancelar.addActionListener(new ActionListener() {
             @Override
             //criado metodo que realizará a ação depois de clicar no botão
             public void actionPerformed(ActionEvent e) {
@@ -161,33 +158,31 @@ public class Login extends JFrame implements VisualWindow {
     }
 
     //criamos o metodo que deve ser chamado nos eventos de logar no sistema ou de kwy press enter
-    private void inSystem() {
+    private void entraSistema() {
         //instanciamos classe de validação de usuario do sistema
         UserDao enter = new UserDao();
 
         //tratamos se usuario e senha receberem true continua para o sistema
         //senão da o alerta e espera novas entradas
         //chama metodo checklogin do DAO usuario
-        if (enter.checkLogin(jtUser.getText(), jpPassword.getText())) {
-            try {
-                new MainWindow(jtUser.getText());//cria instancia da janela principal do sistema e passa qual usuario esta usando
-            }catch (Exception e){
-               System.out.print(e.getMessage());
+        if (enter.checkLogin(jtUsuario.getText(), jpassSenha.getText())) {
+            new TelaPrincipal(jtUsuario.getText());//cria instancia da janela principal do sistema e passa qual usuario esta usando
 
-            }
+
+
            dispose();//fecha janela de login
 
         } else {
-            jpPassword.setBackground(new Color(255, 71, 54));// muda a cor da caixa texto de senha
-            jtUser.setBackground(new Color(255, 71, 54));//muda a cor da caixa de texto usuario
-            lbPassword.setForeground(new Color(255, 71, 54));//muda a cor da letra do label senha
-            lbUser.setForeground(new Color(255, 71, 54));//muda a cor do label de usuario
+            jpassSenha.setBackground(new Color(255, 71, 54));// muda a cor da caixa texto de senha
+            jtUsuario.setBackground(new Color(255, 71, 54));//muda a cor da caixa de texto usuario
+            labelSenha.setForeground(new Color(255, 71, 54));//muda a cor da letra do label senha
+            labelUsuario.setForeground(new Color(255, 71, 54));//muda a cor do label de usuario
             getContentPane().setBackground(new Color(67, 198, 190));//muda cor de fundo da tela chamar atenção user
-            lbStatus.setText("você possui mais " + cont-- + " tentativas ");// manda msg de dados incorretos ao label e mostra contador
+            labelEstado.setText("você possui mais " + contador-- + " tentativas ");// manda msg de dados incorretos ao label e mostra contador
 
             //trata contagem onde chegando a zero fecha a tela de login do sistema
             //contador foi pre inicializado com 3 tentativas
-            if (cont < 0) {
+            if (contador < 0) {
                 System.exit(0);
             }
 

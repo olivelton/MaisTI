@@ -3,12 +3,15 @@
 
 package control;
 
+import javax.jws.soap.SOAPBinding;
+import javax.net.ssl.SSLKeyException;
 import javax.swing.*;
 import java.sql.*;
 
 public class ConnectDatabase {
     private final static String DRIVER = "com.mysql.jdbc.Driver";// carregando o driver do mysql
     private final static String URL = "jdbc:mysql://localhost/maisti";
+    private final static String OPTIONS = "?verifyServerCertificate=false&useSSL=true&requireSSL=true";
     private final static String LOGIN = "admin";
     private final static String PASS = "admin";
 
@@ -18,7 +21,7 @@ public class ConnectDatabase {
         //como trabalha se com banco externo usamos try catch para tratar
         try {
             Class.forName(DRIVER);// chama classe do driver
-            return DriverManager.getConnection(URL, LOGIN, PASS); // classe do driver e parametros passados
+            return DriverManager.getConnection(URL + OPTIONS, LOGIN, PASS); // classe do driver e parametros passados
             // para login no banco de dados.
         }
         catch (ClassNotFoundException  | SQLException ex) {
