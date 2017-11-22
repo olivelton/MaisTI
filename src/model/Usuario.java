@@ -1,6 +1,8 @@
 package model;
 
-public class User {
+import modelDao.UsuarioDao;
+
+public class Usuario {
     private int id_user;
     private String nome;
     private String senha;
@@ -29,6 +31,23 @@ public class User {
         this.senha = senha;
     }
 
+    
+    public void cadastraUsuarioBanco() {
+    	new UsuarioDao().novoUsuario(this.nome, this.senha);
+    }
+    
+    public void consultaUsuario() {
+    new UsuarioDao().consultar();
+    }
 
-
+    
+    public void deletarUsuario() {
+    	
+    	new UsuarioDao().excluirUsuario(getId_user());
+    	
+    }
+    
+    public void editarUsuario(int id_usuario) {
+    	new UsuarioDao().editaUsuario(id_usuario, nome, senha);
+    }
 }

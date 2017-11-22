@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.Usuario;
 import modelDao.UsuarioDao;
 
 public class CardCadastrarUsuario extends JPanel implements VisualWindow {
@@ -57,7 +58,9 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 		jbCadastrar = new JButton("Cadastrar");
 		jbLimpar = new JButton("Limpar");
 		jbCancelar = new JButton("Cancelar");
-
+		
+		
+		
 		labelNome.setBounds(110 + X, 50 + Y, 250 + WHIDT, 40 + HEIGHT);
 		labelComfirmaSenha.setBounds(110 + X, 150 + Y, 250 + WHIDT, 40 + HEIGHT);
 		labelSenha.setBounds(110 + X, 100 + Y, 270 + WHIDT, 40 + HEIGHT);
@@ -79,7 +82,9 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 		this.add(jpConfirmaSenha);
 		this.add(jbLimpar);
 		this.add(labelComfirmaSenha);
-
+		
+		
+		
 	}
 
 	@Override
@@ -161,8 +166,13 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 				boolean comparaSenha = valida.comparaSenhas(jpSenha.getText(), jpConfirmaSenha.getText());
 
 				if (verificaNome && verificaSenha && comparaSenha && verificaSenha2) {
-					new UsuarioDao().novoUsuario(jtNome.getText(), jpSenha.getText());
+					Usuario novousuario = new Usuario();
+					novousuario.setNome(jtNome.getText());
+					novousuario.setSenha(jpSenha.getText());
+					novousuario.cadastraUsuarioBanco();
+					
 					limparCampos();
+					
 				} else {
 					if (comparaSenha) {
 
@@ -207,6 +217,8 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 			}
 		});
 
+		
+		
 	}
 	
 	public void limparCampos() {

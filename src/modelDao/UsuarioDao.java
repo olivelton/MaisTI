@@ -8,46 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import control.ConnectDatabase;
-import model.User;
+import model.Usuario;
 
 import javax.swing.*;
 
 public class UsuarioDao {
 
-    public void create(User user) {
-        //chamamos a conexão com o banco
-        Connection con = ConnectDatabase.getConnection();
-        PreparedStatement stat;// cria um statment
-        stat = null;//seta null ao statment
-        //tratamento de erro
-        try {
-            //atribui query ao statment
-        stat = con.prepareStatement("insert in to tb_usuario (nome_usuario, senha)values(?, ?)");
-        // diz que na posição 1 de valores vai buscar get nome do usuario
-        stat.setString(1,user.getNome());
-        //diz que na posição 2 dos valores da query vai busca a senha do usuario
-        stat.setString(2,user.getSenha());
-        //responsavel pela sql exception pela dml do mysql
-        stat.executeUpdate();
+   
 
-        JOptionPane.showMessageDialog(null,"cadastrado com suscesso");
-
-        }catch (SQLException u){//caso de erro cai no catch e informa usuario com exception
-            JOptionPane.showMessageDialog(null," erro ao cadastrar usuario: "+u);
-        }finally {// finaly idependente se de exception ou não
-            //vai cair aqui pra finalizar e este finaliza a conexão e o statment
-            ConnectDatabase.closeConnection(con, stat);
-        }
-    }
-
-    public List<User> read(){
+    public List<Usuario> consultar(){
         Connection con = ConnectDatabase.getConnection();
         PreparedStatement stat;// cria um statment
         stat = null;//seta null ao statment
         ResultSet result;
         result = null;
 
-        List<User> usuarios = new ArrayList<>();// usuarios do tipo lista recebe uma array list
+        List<Usuario> usuarios = new ArrayList<>();// usuarios do tipo lista recebe uma array list
         //tratamento de erro
         try {
             //atribui query ao statment
@@ -57,14 +33,14 @@ public class UsuarioDao {
             // criamos um laço para atribuir os valores vindos da consulta
             while (result.next()){
                 // instanciamos objeto usuario
-                User user = new User();
+                Usuario user = new Usuario();
                 user.setId_user(result.getInt("id_usuario"));//adiciona iduser em model o id user
                 user.setNome(result.getString("nome_usuario"));//adiciona nome em model nome user
                 user.setSenha(result.getString("senha"));//adiciona senha em model senha user
                 usuarios.add(user);//adiciona todos os dados a lista criada acima
             }
 
-            JOptionPane.showMessageDialog(null,"cadastrado com suscesso");
+            
 
         }catch (SQLException u){//caso de erro cai no catch e informa usuario com exception
             JOptionPane.showMessageDialog(null," erro ao consultar usuario: "+u);
@@ -76,6 +52,45 @@ public class UsuarioDao {
         return usuarios;
 
     }
+    
+    public List<Usuario> consultarNome(String nome){
+        Connection con = ConnectDatabase.getConnection();
+        PreparedStatement stat;// cria um statment
+        stat = null;//seta null ao statment
+        ResultSet result;
+        result = null;
+
+        List<Usuario> usuarios = new ArrayList<>();// usuarios do tipo lista recebe uma array list
+        //tratamento de erro
+        try {
+            //atribui query ao statment
+            stat = con.prepareStatement("SELECT * FROM tb_usuario where nome_usuario like ?  ");
+           //result recebe stat.resultquery que é responsavel por trazer a consulta
+            stat.setString(1, '%' + nome + '%');// segundo campo recebe senha
+            result =  stat.executeQuery();
+            // criamos um laço para atribuir os valores vindos da consulta
+            while (result.next()){
+                // instanciamos objeto usuario
+                Usuario user = new Usuario();
+                user.setId_user(result.getInt("id_usuario"));//adiciona iduser em model o id user
+                user.setNome(result.getString("nome_usuario"));//adiciona nome em model nome user
+                user.setSenha(result.getString("senha"));//adiciona senha em model senha user
+                usuarios.add(user);//adiciona todos os dados a lista criada acima
+            }
+
+            
+
+        }catch (SQLException u){//caso de erro cai no catch e informa usuario com exception
+            JOptionPane.showMessageDialog(null," erro ao consultar usuario: "+u);
+        }finally {// finaly idependente se de exception ou não
+            //vai cair aqui pra finalizar e este finaliza a conexão e o statment
+            ConnectDatabase.closeConnection(con, stat, result);
+
+        }
+        return usuarios;
+
+    }
+    
 
     public boolean checkLogin(String login, String senha){
         Connection con = ConnectDatabase.getConnection();
@@ -143,5 +158,68 @@ public class UsuarioDao {
     	
     }
 
+    public void editaUsuario(int id, String nome, String senha) {
+   	 Connection con = ConnectDatabase.getConnection();
+     PreparedStatement stat;// cria um statment
+     stat = null;//seta null ao statment
+   
+    
 
+
+     //tratamento de erro
+     try {
+         //atribui query ao statment
+    	
+         stat = con.prepareStatement("update tb_usuario set nome_usuario = ?, senha = ? Where id_usuario = ?");
+         stat.setString(1, nome);//primeiro campo recebe login
+         stat.setString(2, senha);// segundo campo recebe senha
+         stat.setInt(3, id);
+        stat.executeUpdate();
+         JOptionPane.showMessageDialog(null, "Usuario: " + nome + " editado com sucesso");
+
+
+     }catch (SQLException u){//caso de erro cai no catch e informa usuario com exception
+         JOptionPane.showMessageDialog(null," erro ao Cadastrar usuario: "+u);
+     }finally {// finaly idependente se de exception ou não
+         //vai cair aqui pra finalizar e este finaliza a conexão e o statment
+         ConnectDatabase.closeConnection(con, stat);
+
+     }
+     
+    	
+    }
+    
+    public void excluirUsuario(int id) {
+    	  
+    	    	 Connection con = ConnectDatabase.getConnection();
+    	         PreparedStatement stat;// cria um statment
+    	         stat = null;//seta null ao statment
+    	       
+    	        
+
+
+    	         //tratamento de erro
+    	         try {
+    	             //atribui query ao statment
+    	        	 
+    	             stat = con.prepareStatement("DELETE FROM tb_usuario where id_usuario = ? ");
+    	             stat.setInt(1, id);
+    	                 	            
+    	             stat.execute();
+    	             
+    	             JOptionPane.showMessageDialog(null, "Usuario deletado com Sucesso");
+
+
+    	         }catch (SQLException u){//caso de erro cai no catch e informa usuario com exception
+    	             JOptionPane.showMessageDialog(null," erro ao Deletar usuario: "+u);
+    	         }finally {// finaly idependente se de exception ou não
+    	             //vai cair aqui pra finalizar e este finaliza a conexão e o statment
+    	             ConnectDatabase.closeConnection(con, stat);
+
+    	         }
+    	         
+    	    	
+    	    
+
+    }
 }

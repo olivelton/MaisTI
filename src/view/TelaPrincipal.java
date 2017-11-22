@@ -33,13 +33,11 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 
 	// labels presentes
 	private JLabel usuarioAtivo;// criamos os componentes que vamos adicionar aqui um label que mostrara usuario
-								// ativo
-
-	// itens de menu
+	
 	// sistema
 	private JMenuItem cadastrarUsuario; // item de menu criar usuario
 	private JMenuItem editarUsuario;
-	private JMenuItem consultarUsuario;
+	
 
 	private JMenuItem sair; // item de menu sair do menu sistema
 	// ajuda
@@ -47,14 +45,20 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 	private JMenuItem sobre; // item de menu informações no menu item
 	// inmpressora
 	private JMenuItem cadastrarImpressora;
-	private JMenuItem editarImpressora;
-	private Container panelPrincipal;
+	
+	
 
 	// plano de dados
+	private JMenuItem cadastrarPlanoDados;
 	// plano de internet
-	// login
+	private JMenuItem cadastrarPlanoInternet;
+	
+	// departamento
+	private JMenuItem cadastrarDepartamento;
 	// funcionario
-
+	private JMenuItem cadastrarFuncionario;
+	
+	
 	public TelaPrincipal() {
 	
 		setLayout();
@@ -112,18 +116,25 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 		// instancia Jmenuitem
 		this.cadastrarUsuario = new JMenuItem("Cadastrar Usuario");
 		this.editarUsuario = new JMenuItem("Editar Usuario");
-		this.editarUsuario = new JMenuItem("Editar Usuarios");
-		this.consultarUsuario = new JMenuItem("Consultar Usuario");
+		this.editarUsuario = new JMenuItem("Editar/Consultar/Deletar - Usuarios");
+		
 		this.sair = new JMenuItem("Sair");
 		// ajuda
 		this.comoUsar = new JMenuItem("Como usar +TI");
 		this.sobre = new JMenuItem("Sobre");
 		// impressora
+		this.cadastrarImpressora = new JMenuItem("Cadastrar Impressora");
+		
 		// plano de dados
+		this.cadastrarPlanoDados = new JMenuItem("Cadastrar Plano de Dados");
 		// planos de internet
+		this.cadastrarPlanoInternet = new JMenuItem("Cadastrar Plano de Internet");
 		// funcionario
+		this.cadastrarFuncionario = new JMenuItem("Cadastrar Funcionario");
 		// departamento
-
+		this.cadastrarDepartamento = new JMenuItem("Cadastrar Departamento");
+		
+		
 		// add Jmenu menubar
 		this.menuBar.add(this.menuSistema);
 		this.menuBar.add(this.menuPlanosInternet);
@@ -140,12 +151,26 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 		// add submenuitem menu sistema
 		this.menuSistema.add(this.cadastrarUsuario);
 		this.menuSistema.add(this.editarUsuario);
-		this.menuSistema.add(this.consultarUsuario);
 		this.menuSistema.add(this.sair);
 
 		// add submenuotem menu ajuda
 		this.menuAjuda.add(this.comoUsar);
 		this.menuAjuda.add(this.sobre);
+		
+		//add  item de menus a impressora 
+		this.menuImpressora.add(cadastrarImpressora);
+		
+		//add  item de menus a planos internet
+		this.menuPlanosInternet.add(cadastrarPlanoInternet);
+		
+		//add item de menu a planos de dados
+		this.menuPlanoDados.add(cadastrarPlanoDados);
+		
+		//add item de menu a funcionario
+		this.menuFuncionario.add(cadastrarFuncionario);		
+		
+		//add item de menu departamento 
+		this.menuDepartametno.add(cadastrarDepartamento);
 		
 		
 		this.painelPrincipal = new PanelPrincipal(this);
@@ -180,13 +205,18 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 
 			}
 		});
-
-		comoUsar.addActionListener(new ActionListener() {
+		
+		editarUsuario.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				trocaPanel(painelPrincipal.INFORMACAO);
+				// TODO Auto-generated method stub
+				trocaPanel(painelPrincipal.EDITARUSUARIO);
 			}
 		});
+
+		
+		
 
 	}
 
@@ -204,7 +234,7 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 			break;
 		case 3:
 			
-			cardLayout.show(painelPrincipal, "informacao");			
+			cardLayout.show(painelPrincipal, "editarusuario");			
 			break;
 
 		case 4:
