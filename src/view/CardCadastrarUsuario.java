@@ -9,7 +9,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +30,11 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 	private JTextField jtNome;
 	private JPasswordField jpSenha, jpConfirmaSenha;
 	private JButton jbCadastrar, jbCancelar, jbLimpar;
+	
+	private BufferedImage img = null;
+	private File arquivo;
+	private JLabel lbFundo;
+	
 	private static int X = 324, Y = 150, WHIDT = 0, HEIGTH = 0;
 
 	public CardCadastrarUsuario() {
@@ -39,8 +48,8 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 	@Override
 	public void setLayout() {
 		// TODO Auto-generated method stub
-		setLayout(null);
-		setBackground(new Color(224, 255, 255));
+		setLayout(new BorderLayout());
+		
 
 	}
 
@@ -83,6 +92,19 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 		this.add(jbLimpar);
 		this.add(labelComfirmaSenha);
 		
+		
+
+		try {
+			arquivo = new File("src/resources/cads.jpg");
+			img = ImageIO.read(arquivo);
+			}
+			catch(Exception exp1){
+				JOptionPane.showMessageDialog(null, "impossivel Carregar imagem de fundo"+ exp1);
+			}
+		
+		lbFundo = new JLabel(new ImageIcon(img));
+		add(lbFundo, BorderLayout.CENTER);
+	
 		
 		
 	}
@@ -205,7 +227,7 @@ public class CardCadastrarUsuario extends JPanel implements VisualWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+					
 			}
 		});
 		jbLimpar.addActionListener(new ActionListener() {

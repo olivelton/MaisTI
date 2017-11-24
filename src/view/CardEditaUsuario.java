@@ -11,9 +11,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -60,7 +64,9 @@ public class CardEditaUsuario extends JPanel implements VisualWindow {
 	public String [] colunas = {"código","Nome"};
 	public DefaultTableModel modelo;
 	
-	
+	private BufferedImage img = null;
+	private File arquivo;
+	private JLabel lbFundo;
 	
 	private static int X = 324, Y = 0, WHIDT = 0, HEIGTH = 0;
 	
@@ -74,8 +80,8 @@ public class CardEditaUsuario extends JPanel implements VisualWindow {
 	@Override
 	public void setLayout() {
 		// TODO Auto-generated method stub
-		setLayout(null);
-		setBackground(new Color(224, 255, 255));
+		setLayout(new BorderLayout());
+		
 	}
 
 	@Override
@@ -85,7 +91,7 @@ public class CardEditaUsuario extends JPanel implements VisualWindow {
 		jtPesquisa = new JTextField();
 		jbPesquisar = new JButton("Pesquisar");
 		jbExcluir = new JButton("Excluir");
-		jbEditar = new JButton("Slavar Edição");
+		jbEditar = new JButton("Salvar Edição");
 		jtNomeEditar = new JTextField();
 		jpSenhaEditar = new JPasswordField();
 		jpSenhaVerifica = new JPasswordField();
@@ -162,6 +168,18 @@ public class CardEditaUsuario extends JPanel implements VisualWindow {
 		add(jpSenhaEditar);
 		add(jpSenhaVerifica);
 					
+		
+		try {
+			arquivo = new File("src/resources/cads.jpg");
+			img = ImageIO.read(arquivo);
+			}
+			catch(Exception exp1){
+				JOptionPane.showMessageDialog(null, "impossivel Carregar imagem de fundo"+ exp1);
+			}
+		
+		lbFundo = new JLabel(new ImageIcon(img));
+		add(lbFundo, BorderLayout.CENTER);
+	
 	}
 
 	@Override
@@ -265,7 +283,8 @@ public class CardEditaUsuario extends JPanel implements VisualWindow {
 				campoNome = (String)tabelaUsuarios.getValueAt(lineCel, 1);
 				
 				jtNomeEditar.setText(campoNome);
-				
+				jpSenhaEditar.setText("");
+				jpSenhaVerifica.setText("");
            	    jtNomeEditar.setEditable(false);
            
 				
@@ -307,7 +326,7 @@ public class CardEditaUsuario extends JPanel implements VisualWindow {
 				boolean verificaNome = valida.verificaVazioText(jtNomeEditar.getText());
 				boolean verificaSenha = valida.verificaVazioText(jpSenhaEditar.getText());
 				boolean verificaSenha2 = valida.verificaVazioText(jpSenhaEditar.getText());
-				boolean comparaSenha = valida.comparaSenhas(jpSenhaEditar.getText(), jpSenhaEditar.getText());
+				boolean comparaSenha = valida.comparaSenhas(jpSenhaEditar.getText(), jpSenhaVerifica.getText());
 
 				if (verificaNome && verificaSenha && comparaSenha && verificaSenha2) {
 					editaUsuario.setNome(jtNomeEditar.getText());

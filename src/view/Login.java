@@ -166,7 +166,7 @@ public class Login extends JFrame implements VisualWindow {
         //senão da o alerta e espera novas entradas
         //chama metodo checklogin do DAO usuario
         if (enter.checkLogin(jtUsuario.getText(), jpassSenha.getText())) {
-            new TelaPrincipal();//cria instancia da janela principal do sistema e passa qual usuario esta usando
+            new TelaPrincipal(jtUsuario.getText());//cria instancia da janela principal do sistema e passa qual usuario esta usando
 
 
 

@@ -9,7 +9,7 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 	// dimension com classe com metodo para captura do tamanho da tela do computador
 	Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 	private JMenuBar menuBar;// cria uma barra de menu para o MAINWINDOW
-	private String usuarioLogado = "Olivelton";// criamos os componentes que vamos adicionar nesse caso vai armazenar o usuario
+	private String usuarioLogado;// criamos os componentes que vamos adicionar nesse caso vai armazenar o usuario
 									// ativo
 
 	// menus que o jframe possuira
@@ -37,7 +37,7 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 	// sistema
 	private JMenuItem cadastrarUsuario; // item de menu criar usuario
 	private JMenuItem editarUsuario;
-	
+	private JMenuItem inicio;
 
 	private JMenuItem sair; // item de menu sair do menu sistema
 	// ajuda
@@ -59,9 +59,10 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 	private JMenuItem cadastrarFuncionario;
 	
 	
-	public TelaPrincipal() {
+	public TelaPrincipal(String usuario) {
 	
 		setLayout();
+		this.usuarioLogado = usuario;
 		setComponents();
 		setEvents();
 		repaintAll();
@@ -113,7 +114,9 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 		this.espaco = new JSeparator();// instanciamos o separador
 		this.usuarioAtivo = new JLabel("Usuario ativo: " + this.usuarioLogado);// instanciamos o label
 
-		// instancia Jmenuitem
+		// menus itens 
+		//sistema
+		this.inicio = new JMenuItem("Inicio");
 		this.cadastrarUsuario = new JMenuItem("Cadastrar Usuario");
 		this.editarUsuario = new JMenuItem("Editar Usuario");
 		this.editarUsuario = new JMenuItem("Editar/Consultar/Deletar - Usuarios");
@@ -149,6 +152,7 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 		this.menuBar.setBackground(new Color(0x6DAFD2));
 
 		// add submenuitem menu sistema
+		this.menuSistema.add(inicio);
 		this.menuSistema.add(this.cadastrarUsuario);
 		this.menuSistema.add(this.editarUsuario);
 		this.menuSistema.add(this.sair);
@@ -214,8 +218,22 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 				trocaPanel(painelPrincipal.EDITARUSUARIO);
 			}
 		});
-
-		
+		cadastrarPlanoInternet.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				trocaPanel(painelPrincipal.CADASTRARPLANONET);
+			}
+		});
+		inicio.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			trocaPanel(painelPrincipal.INICIO);	
+			}
+		});
 		
 
 	}
@@ -238,7 +256,7 @@ public class TelaPrincipal extends JFrame implements VisualWindow {
 			break;
 
 		case 4:
-
+			cardLayout.show(painelPrincipal, "cadastrarplanonet");
 
 			break;
 

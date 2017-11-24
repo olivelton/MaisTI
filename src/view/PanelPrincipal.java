@@ -15,10 +15,12 @@ public class PanelPrincipal extends JPanel implements VisualWindow  {
 	public CardCadastrarUsuario cardCadUsu;
 	public CardEditaUsuario cardEditarUsu;
 	public CardInfo cardInformacao;
+	private CardCadastraPlanoNet cardCadastrarPlanoNet;
 	
 	public static final int INICIO = 1;
 	public static final int CADASTROUSUARIO = 2;
-	public static final int EDITARUSUARIO = 3;	
+	public static final int EDITARUSUARIO = 3;
+	public static final int CADASTRARPLANONET = 4;
 	
 	public PanelPrincipal(TelaPrincipal principal) {
 		this.telaprincipal = principal;
@@ -44,12 +46,14 @@ public class PanelPrincipal extends JPanel implements VisualWindow  {
 		cardInformacao = new CardInfo();
 		cardInicial = new Inicio(telaprincipal);
 		cardEditarUsu = new CardEditaUsuario();
+		cardCadastrarPlanoNet = new CardCadastraPlanoNet();
 		
 		
 		add(cardInicial, "inicial");
 		add(cardCadUsu, "cadastrousuario");
 		add(cardEditarUsu, "editarusuario");
 		add(cardInformacao, "informacao");
+		add(cardCadastrarPlanoNet, "cadastrarplanonet");
 		
 		
 		

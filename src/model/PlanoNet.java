@@ -1,4 +1,4 @@
 package model;
 
-public class PlanoNet {
+public class PlanoNet  {
 }
